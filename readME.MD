@@ -10,7 +10,7 @@ The machine follows the transitions and takes specific actions based on the stat
 
 The coffee machine system is a simple state machine that allows you to control the behavior of a coffee machine. It has four states: off, waiting, brewing, and dispensing. These states represent the different stages of operation for the coffee machine.
 
-There are also four inputs that the coffee machine can receive: off, on, start process, and timer. These inputs allow you to control the coffee machine by turning it on or off, starting the brewing process, or timer. The coffee machine transitions between these states based on the input it receives. For example, if the current state is off and the input is on, the coffee machine will transition to the waiting state. If the current state is BREWING and the input is timer, the coffee machine will transition to the dispensing state in which it will take 10 seconds to brew the coffee. In Dispensing, if there is no other input in 10 second, the timer input will be triggered and it will move to the waiting state.
+There are also four inputs that the coffee machine can receive: off, on, start process, and timer. These inputs allow you to control the coffee machine by turning it on or off, starting the brewing process, or timer. The coffee machine transitions between these states are based on the input it receives. For example, if the current state is off and the input is on, the coffee machine will transition to the waiting state. If the current state is brewing which is the process of extracting flavors from ground coffee beans by mixing hot water with the beans, it will take 10 seconds, for the process to happen and after 10 seconds, the state wil move to dispensing which is the process of releasing the brewed coffee in which will take 10 second for the dispensing process to finish. If the dispensing process is done, it will directly move back to the waiting state. In the waiting state, the machine then could be turned off if the user is done using the machine.
 
 
 
@@ -22,22 +22,22 @@ The transitions could be seen clearly from the transition table:
 
 These are the karnaugh map:
 
-s0
+- s0
 ![Alt text](./img/s0.png)
-s0 = s0s1'F0 +s1F0F1' + s0s1F1' 
+s0 = s0s1' + s0F0' + s0F1' + s1F0F1'
 
 
-s1
+- s1
 ![Alt text](./img/s1.png)
-s1 = s0'F0'F1' + s0s1F1' + s1F0F1 + s0F0F1
+s1 = s0s1 + s0'F0'F1' + s1F0F1 + s0F0F1
 
-F0
+- o0
 ![Alt text](./img/o0.png)
-F0 = s0
+o0 = s0
 
-F1
+- o1
 ![Alt text](./img/o1.png)
-F1 = s1
+o1 = s1
 
 ## Visualisation
 for a clearer understanding of the machine, i have created a code in which works based on the system above.
@@ -60,6 +60,9 @@ make sure to install wsl first
 install the code through zip
 
 open the code and run make inside the terminal
+
+
+## Thank you!
 
 
 

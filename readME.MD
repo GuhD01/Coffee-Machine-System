@@ -46,7 +46,7 @@ When the code is ran, the starting state will be off. It will ask for user's inp
 
 Example of Brewing state:
 
-![Alt text](./img/brewing.png)
+![Alt text](./img/Brewing.png)
 
 Example of Waiting state:
 

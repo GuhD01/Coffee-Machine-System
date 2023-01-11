@@ -1,48 +1,8 @@
 #include "mylib.h"
-#include <time.h>
 
-extern time_t timer;
-
-void update_coffee_machine(int *state, int input){
-    if (*state == OFF){
-        if (input == INPUT_ON){
-            *state = WAITING;
-        } else {
-            *state = OFF;
-        }
-    } else if (*state == WAITING){
-        if (input == INPUT_START_PROCESS){
-            *state = BREWING;
-            timer = time(NULL); 
-        } else if (input == INPUT_OFF){
-            *state = OFF;
-        } else {
-            *state = WAITING;
-        }
-    } else if (*state == BREWING || *state == DISPENSING){
-        if (time(NULL) - timer > 10){
-            if (*state == BREWING){
-                *state = DISPENSING;
-                timer = time(NULL); 
-            } else if (*state == DISPENSING){
-                *state = WAITING;
-                timer = time(NULL); 
-            }
-        }
-    }
+void states(int s0, int s1, int f0, int f1, int* S0, int* S1) {
+  *S0 = !s1 && !f0 || !s0 && !f0 && !f1 || !s0 && !f0 && f1 || s1 && f0 && !f1;
+  *S1 = s0 && s1 || !s0 && !f0 && !f1 && s1 || s1 && f0 && f1 || s0 && f0 && f1;
 }
 
 
-
-const char *get_state_string(int state) {
-  if (state == OFF) {
-    return "off";
-  } else if (state == WAITING) {
-    return "waiting";
-  } else if (state == BREWING) {
-    return "brewing";
-  } else if (state == DISPENSING) {
-    return "dispensing";
-  }
-  return "unknown";
-}
